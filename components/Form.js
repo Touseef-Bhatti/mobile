@@ -1,70 +1,111 @@
-import { useState } from 'react';
-import {View, Text, TextInput, StyleSheet, ScrollView,Button} from 'react-native'
-
+// ...existing code...
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, ScrollView, Button } from 'react-native';
 
 const Form = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [comnfirmPassword, setConfirmPassword] = useState("");
+    const [showData, setShowData] = useState(false);
 
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
+    return (
+        <ScrollView>
+            <View style={style.container}>
+                <View style={style.heading}>
+                    <Text style={style.headText}>My Sign Up Form</Text>
+                </View>
 
-    const hanldeSubmit = () => {
-        alert(`Name: ${name} \nEmail: ${email}`)
-    }
+                <Text style={style.lable}>Name</Text>
+                <TextInput
+                    value={name}
+                    onChangeText={setName}
+                    style={style.input}
+                    placeholder="Enter your name"
+                />
 
-  return (
-    <>
-    <ScrollView>
-        <View style={style.container}>
-            <View style={style.heading}><Text style={style.headText}>My Sign Up Form</Text></View>
-            <Text style={style.lable}>Name</Text>
-            <TextInput value={name} onChangeText={setName} style={style.input} placeholder='Enter your name'/>
-            <Text style={style.lable}>Email</Text>
-            <TextInput value={email} onChangeText={setEmail} style={style.input} placeholder='Enter your e-mail'/>
-            {/* <Text style={style.lable}>Password</Text>
-            <TextInput style={style.input} placeholder='Enter password'/>
-            <Text style={style.lable}>Confirm Password</Text>
-            <TextInput style={style.input} placeholder='Confirm password'/> */}
-            <View style={style.btn}><Button onPress={hanldeSubmit} title = 'Sign Up' /></View>
-            
-        </View>
-    </ScrollView>
-    </>
-  )
-}
+                <Text style={style.lable}>Email</Text>
+                <TextInput
+                    value={email}
+                    onChangeText={setEmail}
+                    style={style.input}
+                    placeholder="Enter your e-mail"
+                    keyboardType="email-address"
+                />
+                <Text>Password</Text>
+                <TextInput 
+                value={password}
+                onChangeText={setPassword}
+                style={style.input} 
+                placeholder="Enter your password" 
+                secureTextEntry={true}
+                />
+                <Text>Confirm Password</Text>
+                <TextInput 
+                value={comnfirmPassword}
+                onChangeText={setConfirmPassword}
+                style={style.input} 
+                placeholder="Confirm your password" 
+                secureTextEntry={true}
+                />
+
+
+                <View style={style.btn}>
+                    <Button onPress={() => setShowData(true)} title="Sign Up" />
+                </View>
+
+                {showData && (
+                    <View style={{ marginTop: 16 }}>
+                        <Text style={style.lable}> Name:</Text>
+                        <Text>{name}</Text>
+
+                        <Text style={[style.lable, { marginTop: 8 }]}>Email:</Text>
+                        <Text>{email}</Text>
+                        <Text style={[style.lable, { marginTop: 8 }]}>Password:</Text>
+                        <Text>{password}</Text>
+                        <Text style={[style.lable, { marginTop: 8 }]}>Confirm Password:</Text>
+                        <Text>{comnfirmPassword}</Text>
+                    </View>
+                )}
+            </View>
+        </ScrollView>
+    );
+};
 
 export default Form;
+// ...existing code...
 
 const style = StyleSheet.create({
-    container:{
+    container: {
         padding: 30,
         borderWidth: 1,
         borderRadius: 8,
         marginTop: 30,
         width: 400,
     },
-    heading:{
+    heading: {
         alignItems: "center",
         marginTop: -15,
-        marginBottom: 25 
+        marginBottom: 25,
     },
-    headText:{
+    headText: {
         fontSize: 25,
         fontWeight: "bold",
-        fontFamily: "ui-serif"
+        fontFamily: "ui-serif",
     },
     input: {
         borderWidth: 1,
         borderRadius: 8,
         padding: 12,
-        marginBottom: 10
+        marginBottom: 10,
     },
-    lable:{
+    lable: {
         fontSize: 16,
-        marginBottom: 5
+        marginBottom: 5,
     },
-    btn:{
+    btn: {
         marginBottom: -15,
         marginTop: 10,
-        borderRadius: 10
-    }
-})
+        borderRadius: 10,
+    },
+});

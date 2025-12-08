@@ -1,6 +1,7 @@
 import { Text, View } from "react-native";
 import Nav  from "../components/Nav.js";
 import Form  from "../components/Form.js";
+import RenderData from "../components/RenderData.js" ;
 
 export default function Index() {
   return (
@@ -13,7 +14,9 @@ export default function Index() {
     >
       <Text>Hello React Native</Text>
       {/* <Nav/> */}
-      <Form/>
+      {/* <Form/> */}
+      
+      {<RenderData/>}
     </View>
   );
 }
